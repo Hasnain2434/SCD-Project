@@ -26,10 +26,22 @@ public class Controller implements ActionListener
 	{
 		try
 		{
-			this.dataadmin.getFilePath();
-			this.dataadmin.getTableName();
+			String path=this.dataadmin.getFilePath();
+			String tablename=this.dataadmin.getTableName();
 			
-			this.datareader.readData(this.dataadmin.getFilePath());
+			if(path==null)
+			{
+				JOptionPane.showMessageDialog(dataadmin, "File Path cannot be Empty.");
+			}
+			else if(tablename==null)
+			{
+				JOptionPane.showMessageDialog(dataadmin, "Table name cannot be Empty.");
+			}
+			else
+			{
+			this.datareader.readData(path);
+			this.datareader.viewData();
+			}
 		}
 		catch(Exception ex)
 		{

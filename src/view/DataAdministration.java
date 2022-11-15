@@ -11,6 +11,7 @@ import java.awt.Window.Type;
 import java.awt.Cursor;
 import java.awt.Dialog.ModalExclusionType;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -231,10 +232,19 @@ public class DataAdministration extends JFrame {
 	}
 	public String getFilePath()
 	{
+		if(textField.getText().isEmpty())
+		{
+			return null;
+		}
+			
 		return textField.getText().toString();
 	}
 	public String getTableName()
 	{
+		if(textField_1.getText().isEmpty())
+		{
+			return null;
+		}
 		return textField_1.getText().toString();
 	}
 	
