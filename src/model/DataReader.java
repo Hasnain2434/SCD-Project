@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import files_classes.Mafoul;
 
 
 
@@ -74,7 +73,6 @@ public class DataReader {
 		  temporary=new char[vocalized.length()];
 		  for(int i=0;i<vocalized.length();i++)
 		  { 
-			   
 			  unvocalized=String.valueOf(vocalizedarray);
 			  System.out.println(unvocalized);
 		  }
