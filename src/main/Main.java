@@ -12,5 +12,7 @@ public class Main {
 		DataReader r=new DataReader();
 		Controller c=new Controller (d,r);
 	}
+	
+
 
 }
