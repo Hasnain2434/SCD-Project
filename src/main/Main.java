@@ -2,15 +2,18 @@ package main;
 
 import controller.Controller;
 import model.DataReader;
-import view.DataAdministration;
+import view.DataAdminView;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
-		DataAdministration d=new DataAdministration();
-		DataReader r=new DataReader();
-		Controller c=new Controller (d,r);
+		
+		  DataAdminView d=new DataAdminView(); 
+		  DataReader r=new DataReader();
+		  Controller c=new Controller (d,r);
+		 
+		
 	}
 	
 

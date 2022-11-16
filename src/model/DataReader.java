@@ -7,16 +7,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
+import dataAccessLayer.DataBaseAccessor;
 
 public class DataReader {
 	private List<List<String>> data;
 	private ArrayList<String> header;
+	private DataBaseAccessor dba;
 	public DataReader()
 	{
 		data= new ArrayList<List<String>>();
 		header=new ArrayList<String>();
+		dba=new DataBaseAccessor();
 	}
 	public void readData(String path)
 	{
@@ -65,21 +66,13 @@ public class DataReader {
 		}
 	}
 	
-	public void viewData()
+	public void insertData(String path,String tablename)
 
 	{
-		for(int i=0;i<header.size();i++)
-		{
-			System.out.print(header.get(i)+" , ");
-		}
-		System.out.println();
+		this.readData(path);
 		for(int i=0;i<data.size();i++)
 		{
-			for(int j=0;j<data.get(i).size();j++)
-			{
-				System.out.print(data.get(i).get(j)+" , ");
-			}
-			System.out.println();
+			dba.insertion(data.get(i), tablename);
 		}
 	}
 	public List<List<String>> getData() {
@@ -89,7 +82,7 @@ public class DataReader {
 		return header;
 	}
 	
-	private String makeUnvocalized(String vocalized)
+	public String makeUnvocalized(String vocalized)
 	{
 		vocalized=vocalized.replaceAll("\u0610", "");//ARABIC SIGN SALLALLAHOU ALAYHE WA SALLAM
         vocalized=vocalized.replaceAll("\u0611", "");//ARABIC SIGN ALAYHE ASSALLAM

@@ -31,7 +31,7 @@ import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class DataAdministration extends JFrame {
+public class DataAdminView extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -56,7 +56,7 @@ public class DataAdministration extends JFrame {
 	private JTable table;
 	private DefaultTableModel model;
 
-	public DataAdministration() {
+	public DataAdminView() {
 		setResizable(false);
 		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 		setTitle("Import Data");
@@ -235,13 +235,6 @@ public class DataAdministration extends JFrame {
 		lblNewLabel_6_2.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 		lblNewLabel_6_2.setBounds(358, 302, 112, 17);
 		contentPane.add(lblNewLabel_6_2);
-		
-		String data[][]={ {"101","Amit","670000"},    
-                {"102","Jai","780000"},    
-                {"101","Sachin","700000"}};    
-		String column[]={"ID","NAME","SALARY"}; 
-		
-		
 		table = new JTable();
 		model=new DefaultTableModel();
 		table.setColumnSelectionAllowed(true);

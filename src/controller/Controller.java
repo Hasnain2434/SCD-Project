@@ -6,17 +6,18 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import model.DataReader;
-import view.DataAdministration;
+import view.DataAdminView;
 
 public class Controller implements ActionListener
 {
-	private DataAdministration dataadmin;
+	private DataAdminView dataadmin;
 	private DataReader datareader;
 	
-	public Controller(DataAdministration dataadmin,DataReader datareader)
+	public Controller(DataAdminView dataadmin,DataReader datareader)
 	{
 		this.dataadmin=dataadmin;
 		this.datareader=datareader;
+		
 		
 		this.dataadmin.addAction(this);
 	}
@@ -39,8 +40,8 @@ public class Controller implements ActionListener
 			}
 			else
 			{
-			this.datareader.readData(path);
-			this.datareader.viewData();
+			this.datareader.insertData(path, tablename);
+			//for table
 			//this.dataadmin.setJTable(this.datareader.getData(),this.datareader.getHeader());
 			}
 		}
