@@ -54,7 +54,7 @@ public class DataAdminView extends JFrame {
 	private JLabel lblNewLabel_6_2;
 	
 	private JTable table;
-	private DefaultTableModel model;
+	private DefaultTableModel modelTable;
 
 	public DataAdminView() {
 		setResizable(false);
@@ -235,8 +235,8 @@ public class DataAdminView extends JFrame {
 		lblNewLabel_6_2.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 		lblNewLabel_6_2.setBounds(358, 302, 112, 17);
 		contentPane.add(lblNewLabel_6_2);
+		modelTable=new DefaultTableModel();
 		table = new JTable();
-		model=new DefaultTableModel();
 		table.setColumnSelectionAllowed(true);
 		table.setCellSelectionEnabled(true);
 		table.setFont(new Font("Segoe UI", Font.PLAIN, 12));
@@ -262,11 +262,21 @@ public class DataAdminView extends JFrame {
 		}
 		return textField_1.getText().toString();
 	}
-	
+	/**
+	 * This function adds event behind every button present on the screen
+	 * @param action
+	 * By Hasnain Riaz
+	 */
 	public void addAction(ActionListener action)
 	{
 		btnNewButton_1.addActionListener(action);
 	}
+	/**
+	 * This function adds rows and columns in JTABLE
+	 * @param data
+	 * @param header
+	 * By Hasnain Riaz
+	 */
 	public void setJTable(List<List<String>> data,List<String> header)
 	{
 		try
@@ -274,13 +284,23 @@ public class DataAdminView extends JFrame {
 		int column=0;
 		while(column<header.size())
 		{
-			model.addColumn(header.get(column));
+			modelTable.addColumn(header.get(column));
+			System.out.println(header.get(column));
+			if(column==1)
+			{
+				modelTable.addColumn("بغیر_اعراب_مشکول");
+			}
+			if(column==3)
+			{
+				modelTable.addColumn("بغیر_اعراب_أصل");
+			}
+			column++;
 		}
-		//table.setModel(model);
+		table.setModel(modelTable);
 		}
 		catch(Exception e)
 		{
-			JOptionPane.showMessageDialog(this, e);
+			JOptionPane.showMessageDialog(this, "Data Cannot be entered into JTable.   "+e.toString());
 		}
 	}
 }

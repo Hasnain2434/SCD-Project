@@ -21,7 +21,9 @@ public class Controller implements ActionListener
 		
 		this.dataadmin.addAction(this);
 	}
-
+	/**
+	 * this function defines what to do when the certain button is pressed
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
@@ -42,7 +44,7 @@ public class Controller implements ActionListener
 			{
 			this.datareader.insertData(path, tablename);
 			//for table
-			//this.dataadmin.setJTable(this.datareader.getData(),this.datareader.getHeader());
+			this.dataadmin.setJTable(this.datareader.getData(),this.datareader.getHeader());
 			}
 		}
 		catch(Exception ex)

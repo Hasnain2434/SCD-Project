@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import dataAccessLayer.DataBaseAccessor;
 
 public class DataReader {
@@ -15,23 +17,28 @@ public class DataReader {
 	private DataBaseAccessor dba;
 	public DataReader()
 	{
-		data= new ArrayList<List<String>>();
-		header=new ArrayList<String>();
 		dba=new DataBaseAccessor();
 	}
+	/**
+	 * This function reads the csv file and holds the data in the 2d array list at run time;
+	 * it reruns nothing
+	 * @param path of file from which it has to read
+	 * By Hasnain Riaz
+	 */
 	public void readData(String path)
 	{
 		String line = "";  
 		String splitBy = ",";
 		try   
-		{  
-		//parsing a CSV file into BufferedReader class constructor  
+		{    
 		File file=new File(path);
 		FileReader filereader=new FileReader(file);
 		BufferedReader br = new BufferedReader(filereader); 
 		int row=0;
 		int column;
-		while ((line = br.readLine()) != null)   //returns a Boolean value  
+		data= new ArrayList<List<String>>();
+		header=new ArrayList<String>();
+		while ((line = br.readLine()) != null)
 		{
 			String[] columns=line.split(splitBy);
 			column=0;
@@ -40,10 +47,21 @@ public class DataReader {
 				data.add(new ArrayList<String>());
 				while(column<columns.length)
 				{
+					if(columns[column].isEmpty())
+					{
+						data.get(row-1).add(null);
+						if(column==3||column==1)
+						{
+							data.get(row-1).add(null);
+						}
+					}
+					else
+					{
 					data.get(row-1).add(columns[column]);
 					if(column==3||column==1)
 					{
 						data.get(row-1).add(this.makeUnvocalized(columns[column]));
+					}
 					}
 					column++;
 				}
@@ -62,10 +80,15 @@ public class DataReader {
 		}   
 		catch (IOException e)   
 		{  
-		e.printStackTrace();  
+		  JOptionPane.showMessageDialog(null, "Error in reading a file from system.   "+e.toString());
 		}
 	}
-	
+	/**
+	 * this function sends the array list to DBA 
+	 * @param path(path of file)
+	 * @param tablename(name of table in database)
+	 * By Hasnain Riaz
+	 */
 	public void insertData(String path,String tablename)
 
 	{
@@ -81,7 +104,13 @@ public class DataReader {
 	public ArrayList<String> getHeader() {
 		return header;
 	}
-	
+	/**
+	 * Take this concept from google
+	 * @param vocalized(String with aerab)
+	 * @return it returns the devaocalized(without aerab string)
+	 * By Hasnain Riaz
+	 * I also tried the character by character way but that doesn't work as that way don't concatenate the Arabic word together
+	 */
 	public String makeUnvocalized(String vocalized)
 	{
 		vocalized=vocalized.replaceAll("\u0610", "");//ARABIC SIGN SALLALLAHOU ALAYHE WA SALLAM

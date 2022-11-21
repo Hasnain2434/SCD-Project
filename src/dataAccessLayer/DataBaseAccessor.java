@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
-public class DataBaseAccessor 
+import javax.swing.JOptionPane;
+
+public class DataBaseAccessor implements DataBaseInterface
 {
 	private String url;
 	private String username;
@@ -13,6 +15,10 @@ public class DataBaseAccessor
 	private String query;
 	private Connection con;
 	private static int numberofdata;
+	/**
+	 * By Hasnain Riaz
+	 * Constructor
+	 */
 	public DataBaseAccessor()
 	{
 		try
@@ -25,11 +31,17 @@ public class DataBaseAccessor
 		}
 		catch(SQLException e)
 		{
-			System.out.println(e.toString());
+			JOptionPane.showMessageDialog(null, "Connection Failed");
 		}
 	}
+	/**
+	 * This function is written by Hasnain Riaz 20F-0300
+	 * It takes an list of String and a table name creates query according to it
+	 * and sends it to the database
+	 */
 	public void insertion(List<String> row,String tablename)
 	{
+		query="";
 		int counter=0;
 		try
 		{
@@ -51,13 +63,13 @@ public class DataBaseAccessor
 				}
 				counter++;
 			}
-			
+			System.out.println(query);
 			con.createStatement().execute(query);
 			
 		}
 		catch(SQLException e)
 		{
-			System.out.println(e.toString());
+			JOptionPane.showMessageDialog(null, "Error in the Query. "+e.toString());
 			System.out.println(query);
 		}
 		finally
@@ -65,6 +77,10 @@ public class DataBaseAccessor
 			this.numberofdata++;
 		}
 	}
+	/**
+	 * By Hasnain Riaz
+	 * This is a destructor created to close the connection
+	 */
 	public void finalize()
 	{
 		try {
@@ -72,7 +88,7 @@ public class DataBaseAccessor
 		} 
 		catch (SQLException e) {
 		
-			System.out.println(e.toString());
+			JOptionPane.showMessageDialog(null, "Connection Closing Failed");
 		}
 	}
 }
