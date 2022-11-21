@@ -45,6 +45,7 @@ public class Controller implements ActionListener
 			this.datareader.insertData(path, tablename);
 			//for table
 			this.dataadmin.setJTable(this.datareader.getData(),this.datareader.getHeader());
+			
 			}
 		}
 		catch(Exception ex)

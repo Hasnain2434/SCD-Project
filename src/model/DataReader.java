@@ -37,7 +37,6 @@ public class DataReader {
 		int row=0;
 		int column;
 		data= new ArrayList<List<String>>();
-		header=new ArrayList<String>();
 		while ((line = br.readLine()) != null)
 		{
 			String[] columns=line.split(splitBy);
@@ -47,30 +46,11 @@ public class DataReader {
 				data.add(new ArrayList<String>());
 				while(column<columns.length)
 				{
-					if(columns[column].isEmpty())
-					{
-						data.get(row-1).add(null);
-						if(column==3||column==1)
-						{
-							data.get(row-1).add(null);
-						}
-					}
-					else
-					{
 					data.get(row-1).add(columns[column]);
 					if(column==3||column==1)
 					{
 						data.get(row-1).add(this.makeUnvocalized(columns[column]));
 					}
-					}
-					column++;
-				}
-			}
-			else
-			{
-				while(column<columns.length)
-				{
-					header.add(columns[column]);
 					column++;
 				}
 			}
@@ -93,9 +73,11 @@ public class DataReader {
 
 	{
 		this.readData(path);
-		for(int i=0;i<data.size();i++)
+		this.getColumnNames(tablename);
+		for(int i=0;i<data.size();)
 		{
-			dba.insertion(data.get(i), tablename);
+			dba.insertion(data.get(i), tablename,i+1);
+			i++;
 		}
 	}
 	public List<List<String>> getData() {
@@ -103,6 +85,11 @@ public class DataReader {
 	}
 	public ArrayList<String> getHeader() {
 		return header;
+	}
+	public void getColumnNames(String tablename)
+	{
+		header=new ArrayList<String>();
+		header=dba.getColumns(tablename);
 	}
 	/**
 	 * Take this concept from google
@@ -118,7 +105,6 @@ public class DataReader {
         vocalized=vocalized.replaceAll("\u0612", "");//ARABIC SIGN RAHMATULLAH ALAYHE
         vocalized=vocalized.replaceAll("\u0613", "");//ARABIC SIGN RADI ALLAHOU ANHU
         vocalized=vocalized.replaceAll("\u0614", "");//ARABIC SIGN TAKHALLUS
-
         //Remove koranic anotation
         vocalized=vocalized.replaceAll("\u0615", "");//ARABIC SMALL HIGH TAH
         vocalized=vocalized.replaceAll("\u0616", "");//ARABIC SMALL HIGH LIGATURE ALEF WITH LAM WITH YEH

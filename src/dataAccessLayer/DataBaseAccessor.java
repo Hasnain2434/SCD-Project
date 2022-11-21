@@ -2,10 +2,14 @@ package dataAccessLayer;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+
+import com.mysql.cj.jdbc.result.ResultSetMetaData;
 
 public class DataBaseAccessor implements DataBaseInterface
 {
@@ -14,7 +18,6 @@ public class DataBaseAccessor implements DataBaseInterface
 	private String password;
 	private String query;
 	private Connection con;
-	private static int numberofdata;
 	/**
 	 * By Hasnain Riaz
 	 * Constructor
@@ -27,7 +30,6 @@ public class DataBaseAccessor implements DataBaseInterface
 		username="root";
 		password=""; 
 		con=DriverManager.getConnection(url, username, password);
-		numberofdata=1;
 		}
 		catch(SQLException e)
 		{
@@ -39,7 +41,7 @@ public class DataBaseAccessor implements DataBaseInterface
 	 * It takes an list of String and a table name creates query according to it
 	 * and sends it to the database
 	 */
-	public void insertion(List<String> row,String tablename)
+	public void insertion(List<String> row,String tablename,int pk)
 	{
 		query="";
 		int counter=0;
@@ -55,7 +57,7 @@ public class DataBaseAccessor implements DataBaseInterface
 				}
 				else if(counter==0)
 				{
-					query=query+numberofdata+",'";
+					query=query+pk+",'";
 				}
 				else
 				{
@@ -63,20 +65,35 @@ public class DataBaseAccessor implements DataBaseInterface
 				}
 				counter++;
 			}
-			System.out.println(query);
 			con.createStatement().execute(query);
 			
 		}
 		catch(SQLException e)
 		{
 			JOptionPane.showMessageDialog(null, "Error in the Query. "+e.toString());
-			System.out.println(query);
-		}
-		finally
-		{
-			this.numberofdata++;
 		}
 	}
+	public ArrayList<String> getColumns(String tableName)
+	{
+		ArrayList<String> columnNames=new ArrayList<String>();
+		query="Select * from "+tableName;
+		try
+		{
+		ResultSet resultset=con.createStatement().executeQuery(query);
+		ResultSetMetaData metaData=(ResultSetMetaData)resultset.getMetaData();
+		for(int i=1;i<=metaData.getColumnCount();i++)
+		{
+			columnNames.add(metaData.getColumnName(i));
+		}
+		return columnNames;
+		}
+		catch(SQLException e)
+		{
+			JOptionPane.showMessageDialog(null, e);
+			return null;
+		}
+	}
+	
 	/**
 	 * By Hasnain Riaz
 	 * This is a destructor created to close the connection

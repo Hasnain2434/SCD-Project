@@ -1,33 +1,27 @@
 package view;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import java.awt.Window.Type;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dialog.ModalExclusionType;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.ImageIcon;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-import javax.swing.SwingConstants;
-import java.awt.Color;
-import java.awt.Font;
-import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JRadioButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -54,6 +48,7 @@ public class DataAdminView extends JFrame {
 	private JLabel lblNewLabel_6_2;
 	
 	private JTable table;
+	private JScrollPane js;
 	private DefaultTableModel modelTable;
 
 	public DataAdminView() {
@@ -235,14 +230,18 @@ public class DataAdminView extends JFrame {
 		lblNewLabel_6_2.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 		lblNewLabel_6_2.setBounds(358, 302, 112, 17);
 		contentPane.add(lblNewLabel_6_2);
+		
 		modelTable=new DefaultTableModel();
-		table = new JTable();
+		table = new JTable(modelTable);
+		js=new JScrollPane(table);
+		contentPane.add(js);
+		contentPane.add(table);
 		table.setColumnSelectionAllowed(true);
 		table.setCellSelectionEnabled(true);
 		table.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		table.setBackground(new Color(192, 192, 192));
 		table.setBounds(378, 338, 661, 345);
-		contentPane.add(table);
+
 		table.setBorder(new LineBorder(Color.BLACK));
 	}
 	public String getFilePath()
@@ -281,20 +280,10 @@ public class DataAdminView extends JFrame {
 	{
 		try
 		{
-		int column=0;
-		while(column<header.size())
+		System.out.println(header.size());
+		for(int i=0;i<header.size();i++)
 		{
-			modelTable.addColumn(header.get(column));
-			System.out.println(header.get(column));
-			if(column==1)
-			{
-				modelTable.addColumn("بغیر_اعراب_مشکول");
-			}
-			if(column==3)
-			{
-				modelTable.addColumn("بغیر_اعراب_أصل");
-			}
-			column++;
+			modelTable.addColumn(header.get(i));
 		}
 		table.setModel(modelTable);
 		}
