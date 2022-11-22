@@ -57,7 +57,7 @@ public class DataBaseAccessor implements DataBaseInterface
 				}
 				else if(counter==0)
 				{
-					query=query+pk+",'";
+					query=query+Integer.parseInt(row.get(counter))+",'";
 				}
 				else
 				{

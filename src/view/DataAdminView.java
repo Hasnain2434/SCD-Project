@@ -20,10 +20,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 public class DataAdminView extends JFrame {
 
@@ -46,10 +49,10 @@ public class DataAdminView extends JFrame {
 	private JLabel lblNewLabel_6_1;
 	private JLabel lblNewLabel_6;
 	private JLabel lblNewLabel_6_2;
-	
 	private JTable table;
-	private JScrollPane js;
-	private DefaultTableModel modelTable;
+	JScrollPane js;
+	DefaultTableModel modelTable;
+	
 
 	public DataAdminView() {
 		setResizable(false);
@@ -57,26 +60,27 @@ public class DataAdminView extends JFrame {
 		setTitle("Import Data");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1101,730);
-		//setLocationRelativeTo(null);
-		setVisible(true);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
 		pnl1_lbl1 = new JLabel("DataBase Administration");
 		pnl1_lbl2 = new JLabel("");
 		lblNewLabel_6_1_1 = new JLabel("*");
+		lblNewLabel_6_1_1.setBounds(357, 302, 14, 17);
 		textField_1 = new JTextField();
+		textField_1.setBounds(491, 299, 259, 29);
 		textField_1.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		
 		
 		Color transition=new Color(95,75,118);
+		contentPane.setLayout(null);
 		
 		sidePanel = new JPanel();
-		sidePanel.setBackground(new Color(54, 33, 89));
 		sidePanel.setBounds(0, 0, 330, 693);
+		sidePanel.setBackground(new Color(54, 33, 89));
 		contentPane.add(sidePanel);
 		sidePanel.setLayout(null);
 		
@@ -160,8 +164,8 @@ public class DataAdminView extends JFrame {
 		nestedPanel_3.add(lblNewLabel_3);
 		
 		middlePanel = new JPanel();
-		middlePanel.setBackground(new Color(110, 89, 222));
 		middlePanel.setBounds(327, 41, 773, 144);
+		middlePanel.setBackground(new Color(110, 89, 222));
 		contentPane.add(middlePanel);
 		middlePanel.setLayout(null);
 		
@@ -173,18 +177,19 @@ public class DataAdminView extends JFrame {
 		middlePanel.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Import File");
+		lblNewLabel_5.setBounds(357, 184, 102, 35);
 		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_5.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		lblNewLabel_5.setBounds(357, 184, 102, 35);
 		contentPane.add(lblNewLabel_5);
 		
 		textField = new JTextField();
-		textField.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		textField.setBounds(491, 238, 259, 29);
+		textField.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		btnNewButton = new JButton("Browse");
+		btnNewButton.setBounds(760, 242, 85, 21);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser filechooser=new JFileChooser();
@@ -197,52 +202,53 @@ public class DataAdminView extends JFrame {
 			}
 		});
 		btnNewButton.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		btnNewButton.setBounds(760, 242, 85, 21);
 		contentPane.add(btnNewButton);
 		
 		lblNewLabel_6_1 = new JLabel("*");
+		lblNewLabel_6_1.setBounds(357, 239, 14, 17);
 		lblNewLabel_6_1.setForeground(Color.RED);
 		lblNewLabel_6_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_6_1.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-		lblNewLabel_6_1.setBounds(357, 239, 14, 17);
 		contentPane.add(lblNewLabel_6_1);
 		
 		lblNewLabel_6 = new JLabel("Path:");
+		lblNewLabel_6.setBounds(358, 239, 54, 17);
 		lblNewLabel_6.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_6.setBounds(358, 239, 54, 17);
 		contentPane.add(lblNewLabel_6);
 		textField_1.setColumns(10);
-		textField_1.setBounds(491, 299, 259, 29);
 		contentPane.add(textField_1);
 		lblNewLabel_6_1_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_6_1_1.setForeground(Color.RED);
 		lblNewLabel_6_1_1.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-		lblNewLabel_6_1_1.setBounds(357, 302, 14, 17);
 		contentPane.add(lblNewLabel_6_1_1);
 		
 		btnNewButton_1 = new JButton("Import");
-		btnNewButton_1.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		btnNewButton_1.setBounds(760, 299, 85, 29);
+		btnNewButton_1.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		contentPane.add(btnNewButton_1);
 		lblNewLabel_6_2 = new JLabel("Table Name:");
+		lblNewLabel_6_2.setBounds(358, 302, 112, 17);
 		lblNewLabel_6_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_6_2.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-		lblNewLabel_6_2.setBounds(358, 302, 112, 17);
 		contentPane.add(lblNewLabel_6_2);
-		
-		modelTable=new DefaultTableModel();
-		table = new JTable(modelTable);
-		js=new JScrollPane(table);
-		contentPane.add(js);
-		contentPane.add(table);
-		table.setColumnSelectionAllowed(true);
-		table.setCellSelectionEnabled(true);
-		table.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		 String data[][]={ {"101","Amit","670000"},    
+                 {"102","Jai","780000"},    
+                 {"101","Sachin","700000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},};    
+String column[]={"ID","NAME","SALARY"};    
+		table = new JTable();
+		table.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		table.setBackground(new Color(192, 192, 192));
-		table.setBounds(378, 338, 661, 345);
-
-		table.setBorder(new LineBorder(Color.BLACK));
+		table.setBounds(380, 355, 670, 328);
+		js=new JScrollPane(table,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		modelTable=new DefaultTableModel();
+		js.setBounds(380, 355, 670, 328);
+		js.setViewportView(table);
+		contentPane.add(js);
+		table.setModel(modelTable);
+		this.setVisible(true);
+		
+		
 	}
 	public String getFilePath()
 	{
@@ -276,20 +282,45 @@ public class DataAdminView extends JFrame {
 	 * @param header
 	 * By Hasnain Riaz
 	 */
-	public void setJTable(List<List<String>> data,List<String> header)
-	{
-		try
-		{
-		System.out.println(header.size());
-		for(int i=0;i<header.size();i++)
-		{
-			modelTable.addColumn(header.get(i));
-		}
-		table.setModel(modelTable);
-		}
-		catch(Exception e)
-		{
-			JOptionPane.showMessageDialog(this, "Data Cannot be entered into JTable.   "+e.toString());
-		}
-	}
+	
+	  public void setJTable(List<List<String>> data,List<String> header) 
+	  { 
+	   try 
+	   { 
+	  String tempArray[]=new String[header.size()];
+	  for(int i=0;i<header.size();i++) 
+	  {
+	  modelTable.addColumn(header.get(i)); 
+	  }
+	  for(int i=0;i<data.size();i++)
+	  { 
+		  for(int j=0;j<data.get(i).size();j++) 
+	  {
+	  tempArray[j]=data.get(i).get(j); 
+	  }
+	  modelTable.insertRow(i, tempArray);
+	  }
+	  table.setModel(modelTable); 
+	  } 
+	   catch(Exception e)
+	  {
+	  JOptionPane.showMessageDialog(this,"Data Cannot be entered into JTable.   "+e.toString()); 
+	  } 
+	  }
+	  /**
+	   * this function makes the table empty
+	   * created by Hasnain Riaz
+	   */
+	  public void emptyJTable()
+	  {
+		  TableColumnModel tableColumn=table.getColumnModel();
+		  if(modelTable.getColumnCount()>0 && modelTable.getRowCount()>0)
+		  {
+		  while(modelTable.getRowCount()>0)
+		  {
+			  modelTable.removeRow(0);
+		  }
+		  modelTable.setColumnCount(0);
+		  }
+	  }
 }

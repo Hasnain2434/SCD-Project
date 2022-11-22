@@ -42,10 +42,10 @@ public class Controller implements ActionListener
 			}
 			else
 			{
+			this.dataadmin.emptyJTable();
 			this.datareader.insertData(path, tablename);
 			//for table
 			this.dataadmin.setJTable(this.datareader.getData(),this.datareader.getHeader());
-			
 			}
 		}
 		catch(Exception ex)
