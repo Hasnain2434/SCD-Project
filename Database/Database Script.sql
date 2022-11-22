@@ -37,4 +37,14 @@
     جنس varchar(50),
     عدد varchar(50)
 );*/
-
+/*
+create table Relation
+(
+    id int PRIMARY KEY,
+    faeelfk int,
+    mafoulfk int,
+    masdarfk int,
+    FOREIGN KEY(faeelfk) REFERENCES faeel(رقم),
+    FOREIGN KEY(mafoulfk) REFERENCES mafoul(رقم),
+     FOREIGN KEY(masdarfk) REFERENCES masdar(رقم)
+);*/
