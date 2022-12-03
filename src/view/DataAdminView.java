@@ -242,6 +242,8 @@ String column[]={"ID","NAME","SALARY"};
 		table.setBounds(380, 355, 670, 328);
 		js=new JScrollPane(table,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		modelTable=new DefaultTableModel();
+		table.setRowSelectionAllowed(false);
+		table.setColumnSelectionAllowed(false);
 		js.setBounds(380, 355, 670, 328);
 		js.setViewportView(table);
 		contentPane.add(js);
