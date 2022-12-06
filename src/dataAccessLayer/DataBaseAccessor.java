@@ -73,7 +73,7 @@ public class DataBaseAccessor implements DataBaseInterface {
 		}
 	}
 
-	public ArrayList<String> getColumns(String tableName) {
+	public ArrayList<String> getColumnsOfTable(String tableName) {
 		ArrayList<String> columnNames = new ArrayList<String>();
 		query = "Select * from " + tableName;
 		try {
@@ -82,11 +82,10 @@ public class DataBaseAccessor implements DataBaseInterface {
 			for (int i = 1; i <= metaData.getColumnCount(); i++) {
 				columnNames.add(metaData.getColumnName(i));
 			}
-			return columnNames;
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, e);
-			return null;
+			JOptionPane.showMessageDialog(null, "Error in fetching column names");
 		}
+		return columnNames;
 	}
 
 	// This function gets the number of columns from table

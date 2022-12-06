@@ -9,15 +9,18 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import com.github.msarhan.lucene.ArabicRootExtractorStemmer;
+
 import dataAccessLayer.DataBaseAccessor;
 import dataAccessLayer.DataBaseInterface;
 
-public class DataReader {
+public class FileDataReaderModel {
 	private List<List<String>> data;
-	private ArrayList<String> header;
+	private ArrayList<String> columnNames;
 	private DataBaseInterface dba;
+	private ArabicRootExtractorStemmer stemmer = new ArabicRootExtractorStemmer();
 
-	public DataReader() {
+	public FileDataReaderModel() {
 		dba = new DataBaseAccessor();
 	}
 
@@ -45,6 +48,10 @@ public class DataReader {
 					while (column < columns.length) {
 						data.get(row - 1).add(columns[column]);
 						if (column == 3 || column == 1) {
+							if(column==10)
+							{
+								data.get(row-1).add(String.join(",", stemmer.stem(columns[column])));
+							}
 							data.get(row - 1).add(this.makeUnvocalized(columns[column]));
 						}
 						column++;
@@ -69,7 +76,7 @@ public class DataReader {
 	{
 		int NumberOfTableColumns = 0;
 		this.readData(path);
-		this.getColumnNames(tablename);
+		this.setColumnNames(tablename);
 		NumberOfTableColumns = dba.getNumberOfTableColumns(tablename);
 		dba.insertion(data, tablename, NumberOfTableColumns);
 	}
@@ -78,13 +85,12 @@ public class DataReader {
 		return data;
 	}
 
-	public ArrayList<String> getHeader() {
-		return header;
+	public ArrayList<String> getcolumnNames() {
+		return columnNames;
 	}
 
-	public void getColumnNames(String tablename) {
-		header = new ArrayList<String>();
-		header = dba.getColumns(tablename);
+	public void setColumnNames(String tablename) {
+		columnNames = dba.getColumnsOfTable(tablename);
 	}
 
 	/**

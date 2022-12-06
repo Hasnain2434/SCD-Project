@@ -5,18 +5,18 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import model.DataReader;
+import model.FileDataReaderModel;
 import view.DataAdminView;
 
 public class Controller implements ActionListener
 {
 	private DataAdminView dataadmin;
-	private DataReader datareader;
+	private FileDataReaderModel fileDataReaderModel;
 	
-	public Controller(DataAdminView dataadmin,DataReader datareader)
+	public Controller(DataAdminView dataadmin,FileDataReaderModel fileDataReaderModel)
 	{
 		this.dataadmin=dataadmin;
-		this.datareader=datareader;
+		this.fileDataReaderModel=fileDataReaderModel;
 		
 		
 		this.dataadmin.addAction(this);
@@ -43,14 +43,14 @@ public class Controller implements ActionListener
 			else
 			{
 			this.dataadmin.emptyJTable();
-			this.datareader.insertData(path, tablename);
+			this.fileDataReaderModel.insertData(path, tablename);
 			//for table
-			this.dataadmin.setJTable(this.datareader.getData(),this.datareader.getHeader());
+			this.dataadmin.setJTable(this.fileDataReaderModel.getData(),this.fileDataReaderModel.getcolumnNames());
 			}
 		}
 		catch(Exception ex)
 		{
-			JOptionPane.showMessageDialog(dataadmin, ex, "Error", 1, null);
+			JOptionPane.showMessageDialog(dataadmin, "Error in importing file", "Error", 1, null);
 		}
 	}
 	

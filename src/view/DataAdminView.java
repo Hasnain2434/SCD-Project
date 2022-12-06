@@ -232,10 +232,7 @@ public class DataAdminView extends JFrame {
 		lblNewLabel_6_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_6_2.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 		contentPane.add(lblNewLabel_6_2);
-		 String data[][]={ {"101","Amit","670000"},    
-                 {"102","Jai","780000"},    
-                 {"101","Sachin","700000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},{"101","Amit","670000"},};    
-String column[]={"ID","NAME","SALARY"};    
+		
 		table = new JTable();
 		table.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		table.setBackground(new Color(192, 192, 192));
@@ -298,7 +295,7 @@ String column[]={"ID","NAME","SALARY"};
 	  { 
 		  for(int j=0;j<data.get(i).size();j++) 
 	  {
-	  tempArray[j]=data.get(i).get(j); 
+	  tempArray[j]=data.get(i).get(j);
 	  }
 	  modelTable.insertRow(i, tempArray);
 	  }
@@ -315,7 +312,6 @@ String column[]={"ID","NAME","SALARY"};
 	   */
 	  public void emptyJTable()
 	  {
-		  TableColumnModel tableColumn=table.getColumnModel();
 		  if(modelTable.getColumnCount()>0 && modelTable.getRowCount()>0)
 		  {
 		  while(modelTable.getRowCount()>0)

@@ -1,7 +1,7 @@
 package main;
 
 import controller.Controller;
-import model.DataReader;
+import model.FileDataReaderModel;
 import view.DataAdminView;
 
 public class Main {
@@ -13,7 +13,7 @@ public class Main {
 		
 		
 		  DataAdminView d=new DataAdminView(); 
-		  DataReader r=new DataReader();
+		  FileDataReaderModel r=new FileDataReaderModel();
 		  Controller c=new Controller (d,r);
 		
 	}
