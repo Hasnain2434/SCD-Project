@@ -11,25 +11,14 @@ import javax.swing.JOptionPane;
 
 import com.mysql.cj.jdbc.result.ResultSetMetaData;
 
-public class DataBaseAccessor implements DataBaseInterface {
-	private String url;
-	private String username;
-	private String password;
-	private String query;
-	private Connection con;
+public class DataBaseAccessor implements DataBaseAccessorInterface {
 
-	/**
-	 * By Hasnain Riaz Constructor
-	 */
+	private DataBaseConnectionInterface connection;
+	private String query;
+
 	public DataBaseAccessor() {
-		try {
-			url = "jdbc:mysql://localhost:3306/SoftwareConstructionAndDevelopment?useSSL=false";
-			username = "root";
-			password = "";
-			con = DriverManager.getConnection(url, username, password);
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Connection Failed");
-		}
+		connection = DataBaseConnection.getInstance();
+		connection.createConnection();
 	}
 
 	/**
@@ -66,7 +55,7 @@ public class DataBaseAccessor implements DataBaseInterface {
 					}
 				}
 				counter = 0;
-				con.createStatement().execute(query);
+				connection.getConnection().createStatement().execute(query);
 			}
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Error in the Query. " + e.toString());
@@ -77,8 +66,8 @@ public class DataBaseAccessor implements DataBaseInterface {
 		ArrayList<String> columnNames = new ArrayList<String>();
 		query = "Select * from " + tableName;
 		try {
-			ResultSet resultset = con.createStatement().executeQuery(query);
-			ResultSetMetaData metaData = (ResultSetMetaData) resultset.getMetaData();
+			ResultSet resultSet = connection.getConnection().createStatement().executeQuery(query);
+			ResultSetMetaData metaData = (ResultSetMetaData) resultSet.getMetaData();
 			for (int i = 1; i <= metaData.getColumnCount(); i++) {
 				columnNames.add(metaData.getColumnName(i));
 			}
@@ -88,11 +77,10 @@ public class DataBaseAccessor implements DataBaseInterface {
 		return columnNames;
 	}
 
-	// This function gets the number of columns from table
 	public int getNumberOfTableColumns(String tableName) {
 		query = "Select * from " + tableName;
 		try {
-			ResultSet resultset = con.createStatement().executeQuery(query);
+			ResultSet resultset = connection.getConnection().createStatement().executeQuery(query);
 			ResultSetMetaData metaData = (ResultSetMetaData) resultset.getMetaData();
 			return metaData.getColumnCount();
 		} catch (SQLException e) {
@@ -105,11 +93,6 @@ public class DataBaseAccessor implements DataBaseInterface {
 	 * By Hasnain Riaz This is a destructor created to close the connection
 	 */
 	public void finalize() {
-		try {
-			con.close();
-		} catch (SQLException e) {
-
-			JOptionPane.showMessageDialog(null, "Connection Closing Failed");
-		}
+		connection.closeConnection();
 	}
 }
