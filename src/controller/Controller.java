@@ -13,6 +13,7 @@ public class Controller implements ActionListener
 	private DataAdminView dataadmin;
 	private FileDataReaderModel fileDataReaderModel;
 	
+	
 	public Controller(DataAdminView dataadmin,FileDataReaderModel fileDataReaderModel)
 	{
 		this.dataadmin=dataadmin;
