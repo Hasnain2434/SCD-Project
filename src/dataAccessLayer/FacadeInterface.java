@@ -1,5 +1,5 @@
 package dataAccessLayer;
 
-public interface FacadeInterface extends DataBaseAccessorInterface,DataBaseAccessorInterfaceUc2 {
+public interface FacadeInterface extends DataBaseAccessorInterface,DataBaseAccessorInterfaceManageWord, DataBaseAccessorInterfaceSearch {
 
 }

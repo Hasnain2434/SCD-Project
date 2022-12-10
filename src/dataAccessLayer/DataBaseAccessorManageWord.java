@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 import com.mysql.cj.jdbc.result.ResultSetMetaData;
 
-public class DataBaseAccessorUc2 implements  DataBaseAccessorInterfaceUc2{
+public class DataBaseAccessorManageWord implements  DataBaseAccessorInterfaceManageWord{
 
 	private DataBaseConnectionInterface connection;
 	private String query;
 	
-	public DataBaseAccessorUc2()
+	public DataBaseAccessorManageWord()
 	{
 		connection = DataBaseConnection.getInstance();
 		connection.createConnection();
@@ -157,5 +157,10 @@ public class DataBaseAccessorUc2 implements  DataBaseAccessorInterfaceUc2{
 			System.out.println("Query : "+query);
 		}
 		return roots;
+	}
+	
+	public void finalize()
+	{
+		connection.closeConnection();
 	}
 }

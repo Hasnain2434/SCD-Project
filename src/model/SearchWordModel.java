@@ -1,52 +1,42 @@
 package model;
-import java.util.ArrayList;
-import dataAccessLayer.DataBaseAccessor;
+
+import java.util.List;
+
 import dataAccessLayer.Facade;
 import dataAccessLayer.FacadeInterface;
 
 public class SearchWordModel {
 	private FacadeInterface facade;
+	private String tableName;
+	
 	public SearchWordModel()
 	{
 		facade=new Facade();
-	}
-	public void insertMeanings(String word,String meaning,String tablename)
-	{	
-		facade.insertMeaning(word, meaning, tablename);
-	}
-	public ArrayList<String> getRowData(String word, String tableName) {
-		return facade.getRow(word, tableName);
+		tableName=null;
 	}
 	
-	public ArrayList<String> getColumnNames(String tableName) {
-		return facade.returnColumnNames(tableName);
-	}
-	
-	
-	public Boolean findWord(String word,String tableName) {
-		return facade.wordFound(word,tableName);
-	}
-	
-	public int getColumnCount(String tableName) {
-		return facade.countColumns(tableName);
-	}
-	
-	public void updateRoots(String root,String word,String tableName) {
-		facade.updateRoot(root,word,tableName);
-	}
-	
-	public String[] getRoots(String word,String tableName) {
-		return facade.getRoots(word, tableName);
-	}
-	
-	public String getTableNameofWord(String word) {
-		String []tables = {"faeel","mafoul","masdar"};
-		for(int i=0; i<tables.length; i++) {
-			if(facade.wordFound(word,tables[i]))
-				return tables[i];
+	public List<List<String>> SearchWord(String word,String column)
+	{
+		List<List<String>> data;
+		
+		data=facade.getSearchedData(word, column,"faeel", facade.getNumberOfTableColumns("faeel"));
+		tableName="faeel";
+		if(data==null)
+		{
+			data=facade.getSearchedData(word, column,"masdar", facade.getNumberOfTableColumns("masdar"));
+			tableName="masdar";
+			if(data==null)
+			{
+				data=facade.getSearchedData(word, column,"mafoul", facade.getNumberOfTableColumns("mafoul"));
+				tableName="mafoul";
+			}
 		}
-		return "";
+		if(data==null)
+			tableName=null;
+		return data;
+	}
+	public String getTableName()
+	{
+		return tableName;
 	}
 }
-
-

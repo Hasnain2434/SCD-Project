@@ -7,29 +7,36 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import model.FileDataReaderModel;
+import model.MeaningAdminModel;
 import model.SearchWordModel;
+import view.AbdullahView;
 import view.DataAdminView;
-import view.SearchWordView;
+import view.MeaningAdminView;
 
 public class Controller implements ActionListener
 {
 	private DataAdminView dataadmin;
 	private FileDataReaderModel fileDataReaderModel;
-	private SearchWordView searchWordView;
+	private MeaningAdminView meaningAdminView;
+	private MeaningAdminModel meaningAdminModel;
+	private AbdullahView searchWordView;
 	private SearchWordModel searchWordModel;
 	private String tableName;
 	
-	public Controller(DataAdminView dataAdmin,FileDataReaderModel fileDataReaderModel,SearchWordView searchWordView,SearchWordModel searchWordModel)
+	public Controller(DataAdminView dataAdmin,FileDataReaderModel fileDataReaderModel,MeaningAdminView meaningAdminView,MeaningAdminModel meaningAdminModel,AbdullahView searchWordView,SearchWordModel searchWordModel)
 	{
 		this.dataadmin=dataAdmin;
 		this.fileDataReaderModel=fileDataReaderModel;
+		this.meaningAdminView=meaningAdminView;
+		this.meaningAdminModel=meaningAdminModel;
 		this.searchWordView=searchWordView;
 		this.searchWordModel=searchWordModel;
 		this.tableName="";
 		
 		this.dataadmin.addAction(this);
+		this.meaningAdminView.addAction(this);
 		this.searchWordView.addAction(this);
-		this.searchWordView.setColumnFields(searchWordModel.getColumnCount("faeel"));
+		this.meaningAdminView.setColumnFields(meaningAdminModel.getColumnCount("faeel"));
 		this.setColumnNames("faeel");
 	}
 	/**
@@ -65,76 +72,100 @@ public class Controller implements ActionListener
 			JOptionPane.showMessageDialog(dataadmin, "Error in importing file", "Error", 1, null);
 		}
 		}
+		else if(e.getActionCommand().equals("Search"))
+		{
+			System.out.println("Hello");
+			searchWordView.emptyJTable();
+			if(searchWordView.checkEmptyTextField()==false)
+			{
+			if(searchWordView.getSearchViaRoot()==true)
+			{
+				
+				searchWordView.setJTable(searchWordModel.SearchWord(searchWordView.getword(),"Root"), meaningAdminModel.getColumnNames(searchWordModel.getTableName()));
+			}
+			else if(searchWordView.getSearchViaWord()==true)
+			{
+				searchWordView.setJTable(searchWordModel.SearchWord(searchWordView.getword(),"بغیر_اعراب_مشکول"), meaningAdminModel.getColumnNames(searchWordModel.getTableName()));
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(searchWordView, "Choose any Radio Button to search");
+			}
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(searchWordView, "Enter something to search");
+			}
+		}
 		else
 		{
 			try
 			{
-				String word=searchWordView.getword();
-				String meaning = searchWordView.getMeaning();
+				String word=meaningAdminView.getword();
+				String meaning = meaningAdminView.getMeaning();
 				if(word.equals(""))
-					JOptionPane.showMessageDialog(searchWordView, "Enter word First\n");
+					JOptionPane.showMessageDialog(meaningAdminView, "Enter word First\n");
 				else {
-					tableName = searchWordModel.getTableNameofWord(word);
+					tableName = meaningAdminModel.getTableNameofWord(word);
 					if(tableName.equals("")) {
-						JOptionPane.showMessageDialog(searchWordView, "No such word Found in DataBase\n");
+						JOptionPane.showMessageDialog(meaningAdminView, "No such word Found in DataBase\n");
 						makeEmpty();
-						searchWordView.EmptyMeaning();
+						meaningAdminView.EmptyMeaning();
 					}
 					else {
-						if(e.getSource() == searchWordView.btnNewButton) {
+						if(e.getSource() == meaningAdminView.btnNewButton) {
 							setRowData(word,tableName);
 							
-							searchWordView.setRootsList(searchWordModel.getRoots(word, tableName));
+							meaningAdminView.setRootsList(meaningAdminModel.getRoots(word, tableName));
 						}
 							
-						else if(e.getSource() == searchWordView.btnNewButton_1) {
+						else if(e.getSource() == meaningAdminView.btnNewButton_1) {
 							if(meaning==null)
-								JOptionPane.showMessageDialog(searchWordView, "Meaning cannot be Empty.");
+								JOptionPane.showMessageDialog(meaningAdminView, "Meaning cannot be Empty.");
 							else 
-								searchWordModel.insertMeanings(word, meaning, tableName);
+								meaningAdminModel.insertMeanings(word, meaning, tableName);
 						}
-						else if(e.getSource() == searchWordView.comboBox) {
-							if(!(searchWordView.getSelected() == null))
-							searchWordModel.updateRoots(searchWordView.getSelected(), word, tableName);
+						else if(e.getSource() == meaningAdminView.comboBox) {
+							if(!(meaningAdminView.getSelected() == null))
+							meaningAdminModel.updateRoots(meaningAdminView.getSelected(), word, tableName);
 									
 						}
 					}}
 				}
 			catch(Exception ex)
 			{
-				JOptionPane.showMessageDialog(searchWordView, ex, "Error", 1, null);
+				JOptionPane.showMessageDialog(meaningAdminView, ex, "Error", 1, null);
 			}
 		}
 	}
 	
 	private void makeEmpty() {
-		// TODO Auto-generated method stub
 		
-		int count = searchWordModel.getColumnCount("faeel");
+		int count = meaningAdminModel.getColumnCount("faeel");
 		
 		for(int i=0; i < count; i++)
 		{
-			searchWordView.attrtextField.get(i).setText("");
+			meaningAdminView.attrtextField.get(i).setText("");
 		}
 	}
 
 	public void setColumnNames(String tableName) {
 		ArrayList <String> columnNames = new ArrayList<String>();
-		columnNames = searchWordModel.getColumnNames(tableName);
-		int count = searchWordModel.getColumnCount(tableName);
+		columnNames = meaningAdminModel.getColumnNames(tableName);
+		int count = meaningAdminModel.getColumnCount(tableName);
 		for(int i=0; i < count; i++)
 		{
-			searchWordView.attrlbl.get(i).setText(columnNames.get(i));
+			meaningAdminView.attrlbl.get(i).setText(columnNames.get(i));
 		}
 	}
 	public void setRowData(String word,String tableName) {
 		ArrayList <String> rowData = new ArrayList<String>();
-		rowData = searchWordModel.getRowData(word,tableName);
-		int count = searchWordModel.getColumnCount(tableName);
+		rowData = meaningAdminModel.getRowData(word,tableName);
+		int count = meaningAdminModel.getColumnCount(tableName);
 		
 		for(int i=0; i < count; i++)
 		{
-			searchWordView.attrtextField.get(i).setText(rowData.get(i));
+			meaningAdminView.attrtextField.get(i).setText(rowData.get(i));
 		}
 	}
 

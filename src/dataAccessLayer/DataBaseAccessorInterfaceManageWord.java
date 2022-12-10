@@ -2,7 +2,7 @@ package dataAccessLayer;
 
 import java.util.ArrayList;
 
-public interface DataBaseAccessorInterfaceUc2 {
+public interface DataBaseAccessorInterfaceManageWord {
 	public void insertMeaning(String word,String meaning, String tableName);
 	
 	public Boolean wordFound(String word,String tableName);

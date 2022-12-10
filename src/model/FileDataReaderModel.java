@@ -76,7 +76,7 @@ public class FileDataReaderModel {
 	{
 		int NumberOfTableColumns = 0;
 		this.readData(path);
-		this.setColumnNames(tablename);
+		this.fetchColumnNamesFromTable(tablename);
 		NumberOfTableColumns = facade.getNumberOfTableColumns(tablename);
 		facade.insertion(data, tablename, NumberOfTableColumns);
 	}
@@ -89,7 +89,7 @@ public class FileDataReaderModel {
 		return columnNames;
 	}
 
-	public void setColumnNames(String tablename) {
+	public void fetchColumnNamesFromTable(String tablename) {
 		columnNames = facade.getColumnsOfTable(tablename);
 	}
 
