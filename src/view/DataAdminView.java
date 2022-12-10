@@ -52,7 +52,7 @@ public class DataAdminView extends JFrame {
 	private JScrollPane js;
 	private DefaultTableModel modelTable;
 	private MeaningAdminView meaningAdminView;
-	private AbdullahView searchMeanView;
+	private SearchWordView searchMeanView;
 	
 
 	
@@ -335,7 +335,7 @@ public class DataAdminView extends JFrame {
 		  this.meaningAdminView=meaningAdminView;
 	  }
 	  
-	  public void setSearchView(AbdullahView searchMeanView) {
+	  public void setSearchView(SearchWordView searchMeanView) {
 			this.searchMeanView = searchMeanView;
 		}
 }

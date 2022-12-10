@@ -26,7 +26,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class AbdullahView extends JFrame {
+public class SearchWordView extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -58,7 +58,7 @@ public class AbdullahView extends JFrame {
 	private DataAdminView dataAdminView;
 	private MeaningAdminView meaningAdminView;
 
-	public AbdullahView() {
+	public SearchWordView() {
 		setResizable(false);
 		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 		setTitle("Meaning");

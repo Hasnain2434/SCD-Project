@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import model.FileDataReaderModel;
 import model.MeaningAdminModel;
 import model.SearchWordModel;
-import view.AbdullahView;
+import view.SearchWordView;
 import view.DataAdminView;
 import view.MeaningAdminView;
 
@@ -19,11 +19,11 @@ public class Controller implements ActionListener
 	private FileDataReaderModel fileDataReaderModel;
 	private MeaningAdminView meaningAdminView;
 	private MeaningAdminModel meaningAdminModel;
-	private AbdullahView searchWordView;
+	private SearchWordView searchWordView;
 	private SearchWordModel searchWordModel;
 	private String tableName;
 	
-	public Controller(DataAdminView dataAdmin,FileDataReaderModel fileDataReaderModel,MeaningAdminView meaningAdminView,MeaningAdminModel meaningAdminModel,AbdullahView searchWordView,SearchWordModel searchWordModel)
+	public Controller(DataAdminView dataAdmin,FileDataReaderModel fileDataReaderModel,MeaningAdminView meaningAdminView,MeaningAdminModel meaningAdminModel,SearchWordView searchWordView,SearchWordModel searchWordModel)
 	{
 		this.dataadmin=dataAdmin;
 		this.fileDataReaderModel=fileDataReaderModel;

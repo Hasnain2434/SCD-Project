@@ -1,11 +1,11 @@
 package testCases;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import dataAccessLayer.DataBaseAccessor;
+import dataAccessLayer.DataBaseAccessorInterface;
 import model.FileDataReaderModel;
 
 class TestCasesUC1 {
@@ -29,4 +29,19 @@ class TestCasesUC1 {
 		FileDataReaderModel temp=new FileDataReaderModel();
 		Assertions.assertNull(temp.getcolumnNames());
 	}
+	@Test
+	void testFetchColumnNamesFromTable()
+	{
+		FileDataReaderModel temp=new FileDataReaderModel();
+		temp.fetchColumnNamesFromTable("faeel");
+		Assertions.assertNotNull(temp.getcolumnNames());
+	}
+	
+	@Test
+	void testGetNumberOfTableColumns()
+	{
+		DataBaseAccessorInterface temp=new DataBaseAccessor();
+		Assertions.assertEquals(temp.getNumberOfTableColumns("faeel"),10);
+	}
+	
 }

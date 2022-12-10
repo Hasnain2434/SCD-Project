@@ -56,7 +56,7 @@ public class MeaningAdminView extends JFrame {
 	private JLabel lblNewLabel_6_2;
 	private JLabel lblRoots ;
 	private DataAdminView dataAdminView;
-	private AbdullahView searchMeanView;
+	private SearchWordView searchMeanView;
 	
 	public MeaningAdminView() {
 		setResizable(false);
@@ -316,7 +316,7 @@ public class MeaningAdminView extends JFrame {
 		this.dataAdminView=dataAdminView;
 	}
 	
-	public void setSearchView(AbdullahView searchMeanView)
+	public void setSearchView(SearchWordView searchMeanView)
 	{
 		this.searchMeanView=searchMeanView;
 	}

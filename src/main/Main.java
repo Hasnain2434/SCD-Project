@@ -4,7 +4,7 @@ import controller.Controller;
 import model.FileDataReaderModel;
 import model.MeaningAdminModel;
 import model.SearchWordModel;
-import view.AbdullahView;
+import view.SearchWordView;
 import view.DataAdminView;
 import view.MeaningAdminView;
 import view.SplashScreen;
@@ -21,7 +21,7 @@ public class Main {
 		splashScreen.setVisible(false);
 		DataAdminView dataAdminView=new DataAdminView(); 
 		MeaningAdminView meaningAdminView=new MeaningAdminView();
-		AbdullahView searchWordView=new AbdullahView();
+		SearchWordView searchWordView=new SearchWordView();
 		dataAdminView.setmeaningAdminView(meaningAdminView);
 		dataAdminView.setSearchView(searchWordView);
 		searchWordView.setDataAdminView(dataAdminView);
