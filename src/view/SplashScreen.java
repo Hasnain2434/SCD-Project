@@ -51,7 +51,8 @@ public class SplashScreen extends JFrame {
 		lblNewLabel.setBounds(0, 0, 555, 385);
 		lblNewLabel.setLabelFor(lblNewLabel);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Hasna\\Downloads\\o6m.gif"));
+		lblNewLabel.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("resources/o6m.gif")));
+		//System.out.println(getClass().getResource("o6m.gif").getPath());
 		contentPane.add(lblNewLabel);
 		this.setVisible(true);
 	}
@@ -60,7 +61,7 @@ public class SplashScreen extends JFrame {
 	{
 		try
 		{
-			for(int i=0;i<100;i++)
+			for(int i=0;i<100;i=i+5)
 			{
 				Thread.sleep(110);
 				progressValue.setText(Integer.toString(i)+"%");
@@ -69,7 +70,7 @@ public class SplashScreen extends JFrame {
 		}
 		catch (Exception ex)
 		{
-			
+			System.out.println("Splash Screen failed to load");
 		}
 	
 	}

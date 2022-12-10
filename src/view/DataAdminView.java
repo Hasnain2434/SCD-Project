@@ -113,7 +113,7 @@ public class DataAdminView extends JFrame {
 		
 		
 		pnl1_lbl2.setHorizontalAlignment(SwingConstants.CENTER);
-		pnl1_lbl2.setIcon(new ImageIcon("C:\\UNIVERSITY\\Scd Project\\Dictionary\\resources\\icons8-database-administrator-24.png"));
+		pnl1_lbl2.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("resources/icons8-database-administrator-24.png")));
 		pnl1_lbl2.setBounds(10, 10, 48, 49);
 		nestedPanel_1.add(pnl1_lbl2);
 		

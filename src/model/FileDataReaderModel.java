@@ -11,17 +11,17 @@ import javax.swing.JOptionPane;
 
 import com.github.msarhan.lucene.ArabicRootExtractorStemmer;
 
-import dataAccessLayer.DataBaseAccessor;
-import dataAccessLayer.DataBaseAccessorInterface;
+import dataAccessLayer.Facade;
+import dataAccessLayer.FacadeInterface;
 
 public class FileDataReaderModel {
 	private List<List<String>> data;
 	private ArrayList<String> columnNames;
-	private DataBaseAccessorInterface dataBase;
+	private FacadeInterface facade;
 	private ArabicRootExtractorStemmer stemmer = new ArabicRootExtractorStemmer();
 
 	public FileDataReaderModel() {
-		dataBase = new DataBaseAccessor();
+		facade = new Facade();
 	}
 
 	/**
@@ -77,8 +77,8 @@ public class FileDataReaderModel {
 		int NumberOfTableColumns = 0;
 		this.readData(path);
 		this.setColumnNames(tablename);
-		NumberOfTableColumns = dataBase.getNumberOfTableColumns(tablename);
-		dataBase.insertion(data, tablename, NumberOfTableColumns);
+		NumberOfTableColumns = facade.getNumberOfTableColumns(tablename);
+		facade.insertion(data, tablename, NumberOfTableColumns);
 	}
 
 	public List<List<String>> getData() {
@@ -90,7 +90,7 @@ public class FileDataReaderModel {
 	}
 
 	public void setColumnNames(String tablename) {
-		columnNames = dataBase.getColumnsOfTable(tablename);
+		columnNames = facade.getColumnsOfTable(tablename);
 	}
 
 	/**
