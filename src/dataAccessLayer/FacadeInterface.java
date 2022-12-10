@@ -1,5 +1,5 @@
 package dataAccessLayer;
 
-public interface FacadeInterface extends DataBaseAccessorInterface {
+public interface FacadeInterface extends DataBaseAccessorInterface,DataBaseAccessorInterfaceUc2 {
 
 }

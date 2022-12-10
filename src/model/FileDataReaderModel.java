@@ -50,7 +50,7 @@ public class FileDataReaderModel {
 						if (column == 3 || column == 1) {
 							if(column==1)
 							{
-								data.get(row-1).add(String.join(",", stemmer.stem(columns[column])));
+								data.get(row-1).add(String.join(" ", stemmer.stem(columns[column])));
 							}
 							data.get(row - 1).add(this.makeUnvocalized(columns[column]));
 						}

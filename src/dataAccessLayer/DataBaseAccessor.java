@@ -16,7 +16,7 @@ public class DataBaseAccessor implements DataBaseAccessorInterface {
 	private DataBaseConnectionInterface connection;
 	private String query;
 
-	public DataBaseAccessor() 
+	public DataBaseAccessor()
 	{
 		connection = DataBaseConnection.getInstance();
 		connection.createConnection();
