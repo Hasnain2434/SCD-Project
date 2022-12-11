@@ -72,9 +72,8 @@ public class Controller implements ActionListener
 			JOptionPane.showMessageDialog(dataadmin, "Error in importing file", "Error", 1, null);
 		}
 		}
-		else if(e.getActionCommand().equals("Search"))
+		else if(e.getActionCommand().equals("MakeSearch"))
 		{
-			System.out.println("Hello");
 			searchWordView.emptyJTable();
 			if(searchWordView.checkEmptyTextField()==false)
 			{

@@ -198,7 +198,6 @@ public class MeaningAdminView extends JFrame {
 		contentPane.add(textField);
 		
 		btnNewButton = new JButton("Search");
-		btnNewButton.setActionCommand("Search");
 		btnNewButton.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		btnNewButton.setBounds(760, 242, 85, 21);
 		contentPane.add(btnNewButton);
@@ -226,7 +225,6 @@ public class MeaningAdminView extends JFrame {
 		
 		btnNewButton_1 = new JButton("Insert");
 		btnNewButton_1.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		btnNewButton_1.setActionCommand("Search");
 		btnNewButton_1.setBounds(760, 299, 85, 29);
 		
 		contentPane.add(btnNewButton_1);

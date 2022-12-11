@@ -199,7 +199,7 @@ public class SearchWordView extends JFrame {
 		contentPane.add(textField);
 
 		btnNewButton = new JButton("Search");
-		btnNewButton.setActionCommand("Search");
+		btnNewButton.setActionCommand("MakeSearch");
 
 		btnNewButton.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		btnNewButton.setBounds(760, 242, 85, 21);
