@@ -9,15 +9,11 @@ import dataAccessLayer.DataBaseAccessor;
 import dataAccessLayer.DataBaseAccessorInterfaceManageWord;
 import dataAccessLayer.DataBaseAccessorManageWord;
 
-
 class TestCasesUC2 {
-
-	
-	
+	DataBaseAccessorInterfaceManageWord dba = new DataBaseAccessorManageWord();
 	@Test
 	void testColumnCount() 
 	{
-		DataBaseAccessorInterfaceManageWord dba = new DataBaseAccessorManageWord();
 		Assertions.assertEquals(10,dba.countColumns("faeel")); 
 	}
 	 
@@ -35,14 +31,12 @@ class TestCasesUC2 {
 		list.add("جنس");
 		list.add("عدد");
 		list.add("معنی");
-		DataBaseAccessorInterfaceManageWord dba = new DataBaseAccessorManageWord();
 		Assertions.assertEquals(list,dba.returnColumnNames("faeel"));
 		
 	}
 	@Test
 	void testBoolWordFound() {
-		DataBaseAccessorInterfaceManageWord dba = new DataBaseAccessorManageWord();
-		Assertions.assertTrue(dba.wordFound("واحد","faeel"));
+		Assertions.assertFalse(dba.wordFound("hello","faeel"));
 	}
 	
 	@Test
@@ -59,17 +53,16 @@ class TestCasesUC2 {
 		list.add("FAdad2");
 		list.add("Mean2 Mean3 Mean3 Mean3");
 		
-		DataBaseAccessorInterfaceManageWord dba = new DataBaseAccessorManageWord();
-		Assertions.assertNotEquals(list,dba.getRow("FWord2", "faeel"));
+		Assertions.assertNotEquals(list,dba.getRow("أبرار", "faeel"));
 	}
 	
 	
 	
 	@Test 
 	void getRoot() {
-		String [] root = {" وحد"};
-		DataBaseAccessorInterfaceManageWord dba = new DataBaseAccessorManageWord();
-		Assertions.assertNotEquals(root,dba.getRoots("واحد", "faeel"));
+		String [] root = {"وحد"};
+		String[] array=dba.getRoots("واحد", "faeel");
+		Assertions.assertEquals(root[0],array[0]);
 	}
 	
 	

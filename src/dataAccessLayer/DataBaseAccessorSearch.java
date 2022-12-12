@@ -20,7 +20,7 @@ public class DataBaseAccessorSearch implements DataBaseAccessorInterfaceSearch{
 		List<List<String>> dataSet=null;
 		boolean found=false;
 		int row=0;
-		query="select * from "+tableName+" where "+column+"='"+word+"';";
+		query="select * from faeel where "+column+"='"+word+"' union select * from mafoul where "+column+"='"+word+"' union select * from masdar where "+column+"='"+word+"'";
 		ResultSet rs=null;
 		try {
 			 rs=connection.getConnection().createStatement().executeQuery(query);

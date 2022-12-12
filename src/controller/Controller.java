@@ -80,11 +80,11 @@ public class Controller implements ActionListener
 			if(searchWordView.getSearchViaRoot()==true)
 			{
 				
-				searchWordView.setJTable(searchWordModel.SearchWord(searchWordView.getword(),"Root"), meaningAdminModel.getColumnNames(searchWordModel.getTableName()));
+				searchWordView.setJTable(searchWordModel.SearchWord(searchWordView.getword(),"Root"), meaningAdminModel.getColumnNames("faeel"));
 			}
 			else if(searchWordView.getSearchViaWord()==true)
 			{
-				searchWordView.setJTable(searchWordModel.SearchWord(searchWordView.getword(),"بغیر_اعراب_مشکول"), meaningAdminModel.getColumnNames(searchWordModel.getTableName()));
+				searchWordView.setJTable(searchWordModel.SearchWord(searchWordView.getword(),"بغیر_اعراب_مشکول"), meaningAdminModel.getColumnNames("faeel"));
 			}
 			else
 			{
