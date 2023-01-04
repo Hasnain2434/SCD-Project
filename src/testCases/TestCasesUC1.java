@@ -4,8 +4,8 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import dataAccessLayer.DataBaseAccessor;
-import dataAccessLayer.DataBaseAccessorInterface;
+import dataAccessLayerPERSISTENTLAYER.DataBaseAccessor;
+import dataAccessLayerPERSISTENTLAYER.DataBaseAccessorInterface;
 import model.FileDataReaderModel;
 
 class TestCasesUC1 {

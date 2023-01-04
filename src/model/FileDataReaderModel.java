@@ -11,8 +11,8 @@ import javax.swing.JOptionPane;
 
 import com.github.msarhan.lucene.ArabicRootExtractorStemmer;
 
-import dataAccessLayer.Facade;
-import dataAccessLayer.FacadeInterface;
+import dataAccessLayerPERSISTENTLAYER.Facade;
+import dataAccessLayerPERSISTENTLAYER.FacadeInterface;
 
 public class FileDataReaderModel {
 	private List<List<String>> data;

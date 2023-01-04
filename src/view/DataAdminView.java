@@ -53,6 +53,10 @@ public class DataAdminView extends JFrame {
 	private DefaultTableModel modelTable;
 	private MeaningAdminView meaningAdminView;
 	private SearchWordView searchMeanView;
+	private CustomDictionaryView customDictionaryView;
+	private JPanel nestedPanel_3_1;
+	private JLabel lblNewLabel_3_1;
+
 	
 
 	
@@ -169,6 +173,35 @@ public class DataAdminView extends JFrame {
 		lblNewLabel_3.setFont(new Font("Segoe UI", Font.PLAIN, 19));
 		lblNewLabel_3.setBounds(49, 12, 116, 35);
 		nestedPanel_3.add(lblNewLabel_3);
+		
+		nestedPanel_3_1 = new JPanel();
+		nestedPanel_3_1.setLayout(null);
+		nestedPanel_3_1.setBorder(null);
+		nestedPanel_3_1.setBackground(new Color(64, 43, 100));
+		nestedPanel_3_1.setBounds(0, 350, 330, 59);
+		sidePanel.add(nestedPanel_3_1);
+		nestedPanel_3_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				nestedPanel_3_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				nestedPanel_3_1.setBackground(transition);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				nestedPanel_3_1.setBackground(new Color(64,43,100));
+			}
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				customDictionaryView.setVisible(true);
+			}
+			
+		});
+		
+		lblNewLabel_3_1 = new JLabel("Custom Dictionary");
+		lblNewLabel_3_1.setForeground(Color.WHITE);
+		lblNewLabel_3_1.setFont(new Font("Segoe UI", Font.PLAIN, 19));
+		lblNewLabel_3_1.setBounds(49, 12, 188, 35);
+		nestedPanel_3_1.add(lblNewLabel_3_1);
 		
 		middlePanel = new JPanel();
 		middlePanel.setBounds(327, 41, 773, 144);
@@ -335,7 +368,12 @@ public class DataAdminView extends JFrame {
 		  this.meaningAdminView=meaningAdminView;
 	  }
 	  
-	  public void setSearchView(SearchWordView searchMeanView) {
+	  public void setSearchView(SearchWordView searchMeanView) 
+	  {
 			this.searchMeanView = searchMeanView;
-		}
+	  }
+	  public void setCustomDictionaryView(CustomDictionaryView customDictionaryView) 
+	  {
+		  this.customDictionaryView = customDictionaryView;
+	  }
 }

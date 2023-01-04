@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import dataAccessLayer.DataBaseAccessor;
-import dataAccessLayer.DataBaseAccessorInterfaceManageWord;
-import dataAccessLayer.DataBaseAccessorManageWord;
+import dataAccessLayerPERSISTENTLAYER.DataBaseAccessor;
+import dataAccessLayerPERSISTENTLAYER.DataBaseAccessorInterfaceManageWord;
+import dataAccessLayerPERSISTENTLAYER.DataBaseAccessorManageWord;
 
 class TestCasesUC2 {
 	DataBaseAccessorInterfaceManageWord dba = new DataBaseAccessorManageWord();

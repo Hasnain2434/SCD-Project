@@ -2,8 +2,8 @@ package model;
 
 import java.util.List;
 
-import dataAccessLayer.Facade;
-import dataAccessLayer.FacadeInterface;
+import dataAccessLayerPERSISTENTLAYER.Facade;
+import dataAccessLayerPERSISTENTLAYER.FacadeInterface;
 
 public class SearchWordModel {
 	private FacadeInterface facade;
@@ -19,6 +19,10 @@ public class SearchWordModel {
 		
 		data=facade.getSearchedData(word, column,"faeel", facade.getNumberOfTableColumns("faeel"));
 		return data;
+	}
+	public String getSingleMeaningFromDatabase(String word)
+	{
+		return facade.searchSingleWord(word);
 	}
 	
 }

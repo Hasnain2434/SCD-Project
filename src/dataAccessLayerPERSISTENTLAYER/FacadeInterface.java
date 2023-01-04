@@ -1,4 +1,4 @@
-package dataAccessLayer;
+package dataAccessLayerPERSISTENTLAYER;
 
 public interface FacadeInterface extends DataBaseAccessorInterface,DataBaseAccessorInterfaceManageWord, DataBaseAccessorInterfaceSearch {
 

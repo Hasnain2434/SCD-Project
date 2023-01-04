@@ -1,8 +1,9 @@
 package model;
 import java.util.ArrayList;
-import dataAccessLayer.DataBaseAccessor;
-import dataAccessLayer.Facade;
-import dataAccessLayer.FacadeInterface;
+
+import dataAccessLayerPERSISTENTLAYER.DataBaseAccessor;
+import dataAccessLayerPERSISTENTLAYER.Facade;
+import dataAccessLayerPERSISTENTLAYER.FacadeInterface;
 
 public class MeaningAdminModel {
 	private FacadeInterface facade;

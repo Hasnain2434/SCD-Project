@@ -1,4 +1,4 @@
-package dataAccessLayer;
+package dataAccessLayerPERSISTENTLAYER;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -45,5 +45,28 @@ public class DataBaseAccessorSearch implements DataBaseAccessorInterfaceSearch{
 		else
 		return null;
 	}
+	@Override
+	public String searchSingleWord(String word) {
+		query="select معنی from faeel where بغیر_اعراب_مشکول='"+word+"' union select معنی from mafoul where بغیر_اعراب_مشکول='"+word+"' union select معنی from masdar where بغیر_اعراب_مشکول='"+word+"'";
+		ResultSet rs;
+		String result=" ";
+		try {
+			 rs=connection.getConnection().createStatement().executeQuery(query);
+			 rs.next();
+			 if(rs.getString(1)==null)
+			 {
+				 result="";
+			 }
+			 else
+			 {
+			 result=rs.getString(1);
+			 }
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 
 }

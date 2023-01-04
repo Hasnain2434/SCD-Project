@@ -1,4 +1,4 @@
-package dataAccessLayer;
+package dataAccessLayerPERSISTENTLAYER;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +60,10 @@ public class Facade implements FacadeInterface {
 	@Override
 	public List<List<String>> getSearchedData(String word, String column, String tableName, int numberOfTableColumns) {
 		return databaseAccessorObjectSearch.getSearchedData(word, column, tableName, numberOfTableColumns);
+	}
+	@Override
+	public String searchSingleWord(String word) {
+		return databaseAccessorObjectSearch.searchSingleWord(word);
 	}
 
 }

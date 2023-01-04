@@ -1,4 +1,4 @@
-package dataAccessLayer;
+package dataAccessLayerPERSISTENTLAYER;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

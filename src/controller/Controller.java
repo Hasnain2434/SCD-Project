@@ -10,6 +10,7 @@ import model.FileDataReaderModel;
 import model.MeaningAdminModel;
 import model.SearchWordModel;
 import view.SearchWordView;
+import view.CustomDictionaryView;
 import view.DataAdminView;
 import view.MeaningAdminView;
 
@@ -21,9 +22,10 @@ public class Controller implements ActionListener
 	private MeaningAdminModel meaningAdminModel;
 	private SearchWordView searchWordView;
 	private SearchWordModel searchWordModel;
+	private CustomDictionaryView customDictionaryView;
 	private String tableName;
 	
-	public Controller(DataAdminView dataAdmin,FileDataReaderModel fileDataReaderModel,MeaningAdminView meaningAdminView,MeaningAdminModel meaningAdminModel,SearchWordView searchWordView,SearchWordModel searchWordModel)
+	public Controller(DataAdminView dataAdmin,FileDataReaderModel fileDataReaderModel,MeaningAdminView meaningAdminView,MeaningAdminModel meaningAdminModel,SearchWordView searchWordView,SearchWordModel searchWordModel,CustomDictionaryView customDictionaryView)
 	{
 		this.dataadmin=dataAdmin;
 		this.fileDataReaderModel=fileDataReaderModel;
@@ -31,11 +33,12 @@ public class Controller implements ActionListener
 		this.meaningAdminModel=meaningAdminModel;
 		this.searchWordView=searchWordView;
 		this.searchWordModel=searchWordModel;
+		this.customDictionaryView=customDictionaryView;
 		this.tableName="";
-		
 		this.dataadmin.addAction(this);
 		this.meaningAdminView.addAction(this);
 		this.searchWordView.addAction(this);
+		this.customDictionaryView.addAction(this);
 		this.meaningAdminView.setColumnFields(meaningAdminModel.getColumnCount("faeel"));
 		this.setColumnNames("faeel");
 	}
@@ -86,6 +89,10 @@ public class Controller implements ActionListener
 			{
 				searchWordView.setJTable(searchWordModel.SearchWord(searchWordView.getword(),"بغیر_اعراب_مشکول"), meaningAdminModel.getColumnNames("faeel"));
 			}
+			else if(searchWordView.getSearchViaMeaning()==true)
+			{
+				searchWordView.setJTable(searchWordModel.SearchWord(searchWordView.getword(),"معنی"), meaningAdminModel.getColumnNames("faeel"));
+			}
 			else
 			{
 				JOptionPane.showMessageDialog(searchWordView, "Choose any Radio Button to search");
@@ -95,6 +102,25 @@ public class Controller implements ActionListener
 			{
 				JOptionPane.showMessageDialog(searchWordView, "Enter something to search");
 			}
+		}
+		else if(e.getActionCommand()=="dictionary")
+		{
+			if(!customDictionaryView.checkEmptyTextField())
+			{
+			customDictionaryView.makeTranslationBoxEmpty();
+			String[] line=customDictionaryView.getTextFieldText();
+			String translation[]=new String[line.length];
+			for(int i=0;i<line.length;i++)
+			{
+				translation[i]=searchWordModel.getSingleMeaningFromDatabase(line[i]);
+			}
+			customDictionaryView.setTranslationBoxText(String.join(" " , translation));
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(customDictionaryView, "Please Enter the Sentence");
+			}
+			
 		}
 		else
 		{

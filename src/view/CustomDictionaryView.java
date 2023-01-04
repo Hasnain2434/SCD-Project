@@ -26,7 +26,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class SearchWordView extends JFrame {
+public class CustomDictionaryView extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -47,22 +47,13 @@ public class SearchWordView extends JFrame {
 
 	private JLabel lblNewLabel_6_1;
 	private JLabel lblNewLabel_6;
-
-	private JRadioButton rdbtnSearchViaWord;
-	private JRadioButton rdbtnSearchViaRoot;
-
-	private JTable table;
-	private JScrollPane js;
-	private DefaultTableModel modelTable;
 	private DataAdminView dataAdminView;
 	private MeaningAdminView meaningAdminView;
-	private CustomDictionaryView customDictionaryView;
-	private JRadioButton rdbtnSearchViaMeaning;
+	private SearchWordView searchMeanView;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JPanel nestedPanel_3_1;
-	private JLabel lblNewLabel_3_1;
+	private JTextField textField_1;
 
-	public SearchWordView() {
+	public CustomDictionaryView() {
 		setResizable(false);
 		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 		setTitle("Meaning");
@@ -162,11 +153,16 @@ public class SearchWordView extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				nestedPanel_3.setBackground(new Color(85, 65, 118));
+				nestedPanel_3.setBackground(new Color(64, 43, 100));
+			}
+			
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				searchMeanView.setVisible(true);
 			}
 		});
 		nestedPanel_3.setBorder(null);
-		nestedPanel_3.setBackground(new Color(85, 65, 118));
+		nestedPanel_3.setBackground(new Color(64, 43, 100));
 		nestedPanel_3.setBounds(0, 293, 330, 59);
 		sidePanel.add(nestedPanel_3);
 		nestedPanel_3.setLayout(null);
@@ -177,30 +173,25 @@ public class SearchWordView extends JFrame {
 		lblNewLabel_3.setBounds(49, 12, 116, 35);
 		nestedPanel_3.add(lblNewLabel_3);
 		
-		nestedPanel_3_1 = new JPanel();
+		JPanel nestedPanel_3_1 = new JPanel();
+				nestedPanel_3_1.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						nestedPanel_3_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+						nestedPanel_3_1.setBackground(transition);
+					}
+					@Override
+					public void mouseExited(MouseEvent e) {
+						nestedPanel_3_1.setBackground(new Color(85, 65, 118));
+					}
+				});
 		nestedPanel_3_1.setLayout(null);
 		nestedPanel_3_1.setBorder(null);
-		nestedPanel_3_1.setBackground(new Color(64, 43, 100));
+		nestedPanel_3_1.setBackground(new Color(85, 65, 118));
 		nestedPanel_3_1.setBounds(0, 350, 330, 59);
 		sidePanel.add(nestedPanel_3_1);
-		nestedPanel_3_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				nestedPanel_3_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				nestedPanel_3_1.setBackground(transition);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				nestedPanel_3_1.setBackground(new Color(64,43,100));
-			}
-			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-				customDictionaryView.setVisible(true);
-			}
-			
-		});
 		
-		lblNewLabel_3_1 = new JLabel("Custom Dictionary");
+		JLabel lblNewLabel_3_1 = new JLabel("Custom Dictionary");
 		lblNewLabel_3_1.setForeground(Color.WHITE);
 		lblNewLabel_3_1.setFont(new Font("Segoe UI", Font.PLAIN, 19));
 		lblNewLabel_3_1.setBounds(49, 12, 188, 35);
@@ -212,14 +203,14 @@ public class SearchWordView extends JFrame {
 		contentPane.add(middlePanel);
 		middlePanel.setLayout(null);
 
-		JLabel lblNewLabel_4 = new JLabel("Search Adminisitration__________________");
+		JLabel lblNewLabel_4 = new JLabel("Custom Dictionary__________________");
 		lblNewLabel_4.setForeground(Color.WHITE);
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_4.setFont(new Font("Segoe UI", Font.PLAIN, 27));
 		lblNewLabel_4.setBounds(10, 62, 524, 61);
 		middlePanel.add(lblNewLabel_4);
 
-		JLabel lblNewLabel_5 = new JLabel("Search any Word with Root");
+		JLabel lblNewLabel_5 = new JLabel("Translate the Sentence");
 		lblNewLabel_5.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_5.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		lblNewLabel_5.setBounds(357, 193, 294, 35);
@@ -227,65 +218,41 @@ public class SearchWordView extends JFrame {
 
 		textField = new JTextField();
 		textField.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		textField.setBounds(491, 238, 259, 29);
+		textField.setBounds(447, 238, 473, 126);
 		textField.setColumns(10);
 		contentPane.add(textField);
 
 		btnNewButton = new JButton("Search");
-		btnNewButton.setActionCommand("MakeSearch");
+		btnNewButton.setActionCommand("dictionary");
 
 		btnNewButton.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		btnNewButton.setBounds(760, 242, 85, 21);
+		btnNewButton.setBounds(930, 239, 85, 21);
 		contentPane.add(btnNewButton);
 
 		lblNewLabel_6_1 = new JLabel("*");
 		lblNewLabel_6_1.setForeground(Color.RED);
 		lblNewLabel_6_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_6_1.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-		lblNewLabel_6_1.setBounds(357, 239, 14, 17);
+		lblNewLabel_6_1.setBounds(357, 238, 14, 17);
 		contentPane.add(lblNewLabel_6_1);
 
-		lblNewLabel_6 = new JLabel("Word");
-		lblNewLabel_6.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+		lblNewLabel_6 = new JLabel("Sentence");
+		lblNewLabel_6.setFont(new Font("Segoe UI", Font.BOLD, 17));
 		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_6.setBounds(358, 239, 54, 17);
+		lblNewLabel_6.setBounds(367, 238, 79, 17);
 		contentPane.add(lblNewLabel_6);
-
-		rdbtnSearchViaRoot = new JRadioButton("Search via Root");
-		buttonGroup.add(rdbtnSearchViaRoot);
-		rdbtnSearchViaRoot.setBackground(new Color(255, 255, 255));
-		rdbtnSearchViaRoot.setFont(new Font("Segoe UI", Font.BOLD, 12));
-		rdbtnSearchViaRoot.setBounds(370, 291, 121, 21);
-		contentPane.add(rdbtnSearchViaRoot);
-
-		rdbtnSearchViaWord = new JRadioButton("Search via word");
-		buttonGroup.add(rdbtnSearchViaWord);
-		rdbtnSearchViaWord.setBackground(new Color(255, 255, 255));
-		rdbtnSearchViaWord.setFont(new Font("Segoe UI", Font.BOLD, 12));
-		rdbtnSearchViaWord.setBounds(506, 291, 121, 21);
-		contentPane.add(rdbtnSearchViaWord);
-
-
-		table = new JTable();
-		table.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		table.setBackground(new Color(192, 192, 192));
-		table.setBounds(380, 355, 670, 328);
-		js = new JScrollPane(table, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		modelTable = new DefaultTableModel();
-		table.setRowSelectionAllowed(false);
-		table.setColumnSelectionAllowed(false);
-		js.setBounds(380, 355, 670, 328);
-		js.setViewportView(table);
-		contentPane.add(js);
-		table.setModel(modelTable);
 		
-		rdbtnSearchViaMeaning = new JRadioButton("Search via Meaning");
-		buttonGroup.add(rdbtnSearchViaMeaning);
-		rdbtnSearchViaMeaning.setFont(new Font("Segoe UI", Font.BOLD, 12));
-		rdbtnSearchViaMeaning.setBackground(Color.WHITE);
-		rdbtnSearchViaMeaning.setBounds(650, 292, 133, 21);
-		contentPane.add(rdbtnSearchViaMeaning);
+		textField_1 = new JTextField();
+		textField_1.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		textField_1.setColumns(10);
+		textField_1.setBounds(447, 443, 473, 126);
+		contentPane.add(textField_1);
+		
+		JLabel lblNewLabel_6_2 = new JLabel("Translation");
+		lblNewLabel_6_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_6_2.setFont(new Font("Segoe UI", Font.BOLD, 17));
+		lblNewLabel_6_2.setBounds(340, 443, 101, 17);
+		contentPane.add(lblNewLabel_6_2);
 
 	}
 
@@ -295,8 +262,14 @@ public class SearchWordView extends JFrame {
 		}
 	}
 
-	public String getword() {
-		return textField.getText().toString();
+	public String[] getTextFieldText() {
+		return this.spiltTextFieldText(textField.getText().toString());
+	}
+	
+	private String[] spiltTextFieldText(String text)
+	{
+		String line[]=text.split(" ");
+		return line;
 	}
 
 	public void addAction(ActionListener action) {
@@ -315,49 +288,19 @@ public class SearchWordView extends JFrame {
 	public void setMeaningAdminView(MeaningAdminView meaningAdminView) {
 		this.meaningAdminView = meaningAdminView;
 	}
-
-	public void setJTable(List<List<String>> data, List<String> header) {
-		try {
-			if (data == null) {
-				JOptionPane.showMessageDialog(this, "No Data found");
-			} else {
-				String tempArray[] = new String[header.size()];
-				for (int i = 0; i < header.size(); i++) {
-					modelTable.addColumn(header.get(i));
-				}
-				for (int i = 0; i < data.size(); i++) {
-					for (int j = 0; j < data.get(i).size(); j++) {
-						tempArray[j] = data.get(i).get(j);
-					}
-					modelTable.insertRow(i, tempArray);
-				}
-				table.setModel(modelTable);
-			}
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, "Data Cannot be entered into JTable.   " + e.toString());
-		}
+	 public void setSearchView(SearchWordView searchMeanView) {
+			this.searchMeanView = searchMeanView;
 	}
-
-	public void emptyJTable() {
-		if (modelTable.getColumnCount() > 0 && modelTable.getRowCount() > 0) {
-			while (modelTable.getRowCount() > 0) {
-				modelTable.removeRow(0);
-			}
-		}
-		modelTable.setColumnCount(0);
-	}
-
-	public boolean getSearchViaRoot() {
-		return rdbtnSearchViaRoot.isSelected();
-	}
-
-	public boolean getSearchViaWord() {
-		return rdbtnSearchViaWord.isSelected();
-	}
-	public boolean getSearchViaMeaning() {
-		return rdbtnSearchViaMeaning.isSelected();
-	}
-	public void setCustomDictionaryView(CustomDictionaryView customDictionaryView) {
-		  this.customDictionaryView = customDictionaryView;
-	  }
+	 public void makeTranslationBoxEmpty()
+	 {
+		 if(!textField_1.getText().isEmpty())
+		 {
+			textField_1.setText(""); 
+		 }
+	 }
+	 
+	 public void setTranslationBoxText(String text)
+	 {
+		 textField_1.setText(text);
+	 }
 }
