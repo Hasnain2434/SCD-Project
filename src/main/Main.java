@@ -1,6 +1,7 @@
 package main;
 
 import controller.Controller;
+import controller.ParameterObject;
 import model.FileDataReaderModel;
 import model.MeaningAdminModel;
 import model.SearchWordModel;
@@ -21,32 +22,36 @@ public class Main {
 		SplashScreen splashScreen=new SplashScreen();
 		splashScreen.animateProgressBar();
 		splashScreen.setVisible(false);
+		
+		
 		DataAdminView dataAdminView=new DataAdminView(); 
 		MeaningAdminView meaningAdminView=new MeaningAdminView();
 		SearchWordView searchWordView=new SearchWordView();
 		CustomDictionaryView customDictionaryView=new CustomDictionaryView();
-		ownObject.IntializeViewsForScreenDirection(dataAdminView, meaningAdminView, searchWordView, customDictionaryView);
+		ParameterObject parameterObject=new ParameterObject(dataAdminView, meaningAdminView, searchWordView, customDictionaryView);
+		
+		ownObject.IntializeViewsForScreenDirection(parameterObject);
 		FileDataReaderModel dataReaderModel=new FileDataReaderModel();
 		MeaningAdminModel meaningAdminModel=new MeaningAdminModel();
 		SearchWordModel searchWordModel=new SearchWordModel();
-		Controller c=new Controller (dataAdminView,dataReaderModel,meaningAdminView,meaningAdminModel,searchWordView,searchWordModel,customDictionaryView);
-		
+		Controller controller=new Controller(parameterObject,dataReaderModel,meaningAdminModel,searchWordModel);
 	}
 	
-	public void IntializeViewsForScreenDirection(DataAdminView dataAdminView,MeaningAdminView meaningAdminView,SearchWordView searchWordView,CustomDictionaryView customDictionaryView)
+	//extract function
+	public void IntializeViewsForScreenDirection(ParameterObject parameterObject)
 	{
-		dataAdminView.setmeaningAdminView(meaningAdminView);
-		dataAdminView.setSearchView(searchWordView);
-		dataAdminView.setCustomDictionaryView(customDictionaryView);
-		searchWordView.setCustomDictionaryView(customDictionaryView);
-		searchWordView.setDataAdminView(dataAdminView);
-		searchWordView.setMeaningAdminView(meaningAdminView);
-		meaningAdminView.setCustomDictionaryView(customDictionaryView);
-		meaningAdminView.setSearchView(searchWordView);
-		meaningAdminView.setDataAdminView(dataAdminView);
-		customDictionaryView.setSearchView(searchWordView);
-		customDictionaryView.setDataAdminView(dataAdminView);
-		customDictionaryView.setMeaningAdminView(meaningAdminView);
+		parameterObject.dataAdminView.setmeaningAdminView(parameterObject.meaningAdminView);
+		parameterObject.dataAdminView.setSearchView(parameterObject.searchWordView);
+		parameterObject.dataAdminView.setCustomDictionaryView(parameterObject.customDictionaryView);
+		parameterObject.searchWordView.setCustomDictionaryView(parameterObject.customDictionaryView);
+		parameterObject.searchWordView.setDataAdminView(parameterObject.dataAdminView);
+		parameterObject.searchWordView.setMeaningAdminView(parameterObject.meaningAdminView);
+		parameterObject.meaningAdminView.setCustomDictionaryView(parameterObject.customDictionaryView);
+		parameterObject.meaningAdminView.setSearchView(parameterObject.searchWordView);
+		parameterObject.meaningAdminView.setDataAdminView(parameterObject.dataAdminView);
+		parameterObject.customDictionaryView.setSearchView(parameterObject.searchWordView);
+		parameterObject.customDictionaryView.setDataAdminView(parameterObject.dataAdminView);
+		parameterObject.customDictionaryView.setMeaningAdminView(parameterObject.meaningAdminView);
 	}
 	
 }

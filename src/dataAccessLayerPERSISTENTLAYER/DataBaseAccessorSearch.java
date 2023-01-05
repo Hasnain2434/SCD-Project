@@ -48,11 +48,12 @@ public class DataBaseAccessorSearch implements DataBaseAccessorInterfaceSearch{
 	@Override
 	public String searchSingleWord(String word) {
 		query="select معنی from faeel where بغیر_اعراب_مشکول='"+word+"' union select معنی from mafoul where بغیر_اعراب_مشکول='"+word+"' union select معنی from masdar where بغیر_اعراب_مشکول='"+word+"'";
-		ResultSet rs;
+		ResultSet rs=null;
 		String result=" ";
 		try {
 			 rs=connection.getConnection().createStatement().executeQuery(query);
-			 rs.next();
+			 if(rs.next()!=false)
+			 {
 			 if(rs.getString(1)==null)
 			 {
 				 result="";
@@ -60,6 +61,7 @@ public class DataBaseAccessorSearch implements DataBaseAccessorInterfaceSearch{
 			 else
 			 {
 			 result=rs.getString(1);
+			 }
 			 }
 			
 		} catch (SQLException e) {

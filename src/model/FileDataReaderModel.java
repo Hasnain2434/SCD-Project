@@ -67,7 +67,7 @@ public class FileDataReaderModel {
 
 	/**
 	 * this function sends the array list to DBA
-	 * 
+	 * extract function
 	 * @param path(path      of file)
 	 * @param tablename(name of table in database) By Hasnain Riaz
 	 */

@@ -25,15 +25,15 @@ public class Controller implements ActionListener
 	private CustomDictionaryView customDictionaryView;
 	private String tableName;
 	
-	public Controller(DataAdminView dataAdmin,FileDataReaderModel fileDataReaderModel,MeaningAdminView meaningAdminView,MeaningAdminModel meaningAdminModel,SearchWordView searchWordView,SearchWordModel searchWordModel,CustomDictionaryView customDictionaryView)
+	public Controller(ParameterObject parameterObject,FileDataReaderModel fileDataReaderModel,MeaningAdminModel meaningAdminModel,SearchWordModel searchWordModel)
 	{
-		this.dataadmin=dataAdmin;
+		this.dataadmin=parameterObject.dataAdminView;
 		this.fileDataReaderModel=fileDataReaderModel;
-		this.meaningAdminView=meaningAdminView;
+		this.meaningAdminView=parameterObject.meaningAdminView;
 		this.meaningAdminModel=meaningAdminModel;
-		this.searchWordView=searchWordView;
+		this.searchWordView=parameterObject.searchWordView;
 		this.searchWordModel=searchWordModel;
-		this.customDictionaryView=customDictionaryView;
+		this.customDictionaryView=parameterObject.customDictionaryView;
 		this.tableName="";
 		this.dataadmin.addAction(this);
 		this.meaningAdminView.addAction(this);
@@ -50,6 +50,32 @@ public class Controller implements ActionListener
 	{
 		if(e.getActionCommand().equals("Import"))
 		{
+			this.actionHandlerButtonImport();
+		}
+		else if(e.getActionCommand().equals("MakeSearch"))
+		{
+			this.actionHandlerButtonMakeSearch();
+		}
+		else if(e.getActionCommand()=="dictionary")
+		{
+			this.actionHandlerButtonDictionary();
+		}
+		else
+		{
+			this.actionHandlerButtonMeaning(e);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	private void actionHandlerButtonImport()
+	{
+
 		try
 		{
 			String path=this.dataadmin.getFilePath();
@@ -74,94 +100,101 @@ public class Controller implements ActionListener
 		{
 			JOptionPane.showMessageDialog(dataadmin, "Error in importing file", "Error", 1, null);
 		}
-		}
-		else if(e.getActionCommand().equals("MakeSearch"))
+		
+	}
+	private void actionHandlerButtonMakeSearch()
+	{
+
+		searchWordView.emptyJTable();
+		if(searchWordView.checkEmptyTextField()==false)
 		{
-			searchWordView.emptyJTable();
-			if(searchWordView.checkEmptyTextField()==false)
-			{
-			if(searchWordView.getSearchViaRoot()==true)
-			{
-				
-				searchWordView.setJTable(searchWordModel.SearchWord(searchWordView.getword(),"Root"), meaningAdminModel.getColumnNames("faeel"));
-			}
-			else if(searchWordView.getSearchViaWord()==true)
-			{
-				searchWordView.setJTable(searchWordModel.SearchWord(searchWordView.getword(),"بغیر_اعراب_مشکول"), meaningAdminModel.getColumnNames("faeel"));
-			}
-			else if(searchWordView.getSearchViaMeaning()==true)
-			{
-				searchWordView.setJTable(searchWordModel.SearchWord(searchWordView.getword(),"معنی"), meaningAdminModel.getColumnNames("faeel"));
-			}
-			else
-			{
-				JOptionPane.showMessageDialog(searchWordView, "Choose any Radio Button to search");
-			}
-			}
-			else
-			{
-				JOptionPane.showMessageDialog(searchWordView, "Enter something to search");
-			}
-		}
-		else if(e.getActionCommand()=="dictionary")
+		if(searchWordView.getSearchViaRoot()==true)
 		{
-			if(!customDictionaryView.checkEmptyTextField())
-			{
-			customDictionaryView.makeTranslationBoxEmpty();
-			String[] line=customDictionaryView.getTextFieldText();
-			String translation[]=new String[line.length];
-			for(int i=0;i<line.length;i++)
-			{
-				translation[i]=searchWordModel.getSingleMeaningFromDatabase(line[i]);
-			}
-			customDictionaryView.setTranslationBoxText(String.join(" " , translation));
-			}
-			else
-			{
-				JOptionPane.showMessageDialog(customDictionaryView, "Please Enter the Sentence");
-			}
 			
+			searchWordView.setJTable(searchWordModel.SearchWord(searchWordView.getword(),"Root"), meaningAdminModel.getColumnNames("faeel"));
+		}
+		else if(searchWordView.getSearchViaWord()==true)
+		{
+			searchWordView.setJTable(searchWordModel.SearchWord(searchWordView.getword(),"بغیر_اعراب_مشکول"), meaningAdminModel.getColumnNames("faeel"));
+		}
+		else if(searchWordView.getSearchViaMeaning()==true)
+		{
+			searchWordView.setJTable(searchWordModel.SearchWord(searchWordView.getword(),"معنی"), meaningAdminModel.getColumnNames("faeel"));
 		}
 		else
 		{
-			try
-			{
-				String word=meaningAdminView.getword();
-				String meaning = meaningAdminView.getMeaning();
-				if(word.equals(""))
-					JOptionPane.showMessageDialog(meaningAdminView, "Enter word First\n");
-				else {
-					tableName = meaningAdminModel.getTableNameofWord(word);
-					if(tableName.equals("")) {
-						JOptionPane.showMessageDialog(meaningAdminView, "No such word Found in DataBase\n");
-						makeEmpty();
-						meaningAdminView.EmptyMeaning();
-					}
-					else {
-						if(e.getSource() == meaningAdminView.btnNewButton) {
-							setRowData(word,tableName);
-							
-							meaningAdminView.setRootsList(meaningAdminModel.getRoots(word, tableName));
-						}
-							
-						else if(e.getSource() == meaningAdminView.btnNewButton_1) {
-							if(meaning==null)
-								JOptionPane.showMessageDialog(meaningAdminView, "Meaning cannot be Empty.");
-							else 
-								meaningAdminModel.insertMeanings(word, meaning, tableName);
-						}
-						else if(e.getSource() == meaningAdminView.comboBox) {
-							if(!(meaningAdminView.getSelected() == null))
-							meaningAdminModel.updateRoots(meaningAdminView.getSelected(), word, tableName);
-									
-						}
-					}}
-				}
-			catch(Exception ex)
-			{
-				JOptionPane.showMessageDialog(meaningAdminView, ex, "Error", 1, null);
-			}
+			JOptionPane.showMessageDialog(searchWordView, "Choose any Radio Button to search");
 		}
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(searchWordView, "Enter something to search");
+		}
+	
+	}
+
+	private void actionHandlerButtonDictionary()
+	{
+
+		if(!customDictionaryView.checkEmptyTextField())
+		{
+		customDictionaryView.makeTranslationBoxEmpty();
+		String[] line=customDictionaryView.getTextFieldText();
+		String translation[]=new String[line.length];
+		for(int i=0;i<line.length;i++)
+		{
+			translation[i]=searchWordModel.getSingleMeaningFromDatabase(line[i]);
+		}
+		customDictionaryView.setTranslationBoxText(String.join(" " , translation));
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(customDictionaryView, "Please Enter the Sentence");
+		}
+		
+	
+	}
+	private void actionHandlerButtonMeaning(ActionEvent e)
+	{
+
+		try
+		{
+			String word=meaningAdminView.getword();
+			String meaning = meaningAdminView.getMeaning();
+			if(word.equals(""))
+				JOptionPane.showMessageDialog(meaningAdminView, "Enter word First\n");
+			else {
+				tableName = meaningAdminModel.getTableNameofWord(word);
+				if(tableName.equals("")) {
+					JOptionPane.showMessageDialog(meaningAdminView, "No such word Found in DataBase\n");
+					makeEmpty();
+					meaningAdminView.EmptyMeaning();
+				}
+				else {
+					if(e.getSource() == meaningAdminView.btnNewButton) {
+						setRowData(word,tableName);
+						
+						meaningAdminView.setRootsList(meaningAdminModel.getRoots(word, tableName));
+					}
+						
+					else if(e.getSource() == meaningAdminView.btnNewButton_1) {
+						if(meaning==null)
+							JOptionPane.showMessageDialog(meaningAdminView, "Meaning cannot be Empty.");
+						else 
+							meaningAdminModel.insertMeanings(word, meaning, tableName);
+					}
+					else if(e.getSource() == meaningAdminView.comboBox) {
+						if(!(meaningAdminView.getSelected() == null))
+						meaningAdminModel.updateRoots(meaningAdminView.getSelected(), word, tableName);
+								
+					}
+				}}
+			}
+		catch(Exception ex)
+		{
+			JOptionPane.showMessageDialog(meaningAdminView, ex, "Error", 1, null);
+		}
+	
 	}
 	
 	private void makeEmpty() {
